@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penyimpanan Data Python</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="card form-card">
+            <h2>💾 Python Data Saver</h2>
+            <p class="sub-title">Simpan data langsung ke file lokal komputer lewat Python</p>
+            
+            {% if notif %}
+                <div class="alert">{{ notif }}</div>
+            {% endif %}
+
+            <form method="POST" action="/">
+                <div class="form-group">
+                    <label for="tipe_data">Pilih Tipe Data:</label>
+                    <select name="tipe_data" id="tipe_data">
+                        <option value="catatan">📝 Catatan Harian</option>
+                        <option value="pengeluaran">💰 Pengeluaran Uang</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="isi_data">Isi Data:</label>
+                    <input type="text" name="isi_data" id="isi_data" placeholder="Ketik data yang ingin disimpan..." required>
+                </div>
+
+                <button type="submit">Simpan Lewat Python</button>
+            </form>
+        </div>
+
+        <div class="display-section">
+            <div class="card data-card">
+                <h3>📜 Riwayat Catatan Harian</h3>
+                <ul>
+                    {% if catatan %}
+                        {% for baris in catatan %}
+                            <li>{{ baris }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="empty-list">Belum ada catatan harian.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card data-card">
+                <h3>💸 Riwayat Pengeluaran</h3>
+                <ul>
+                    {% if pengeluaran %}
+                        {% for baris in pengeluaran %}
+                            <li>{{ baris }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="empty-list">Belum ada data pengeluaran.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
